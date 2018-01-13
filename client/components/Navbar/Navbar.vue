@@ -1,7 +1,12 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <p>Book List</p>
+      <router-link class="navbar-item" to="/">Bnizzle's Books</router-link>
+    </div>
+
+    <div class="navbar-start">
+      <router-link class="navbar-item" to="/">Home</router-link>
+      <router-link class="navbar-item" to="post">Recommend a Book</router-link>
     </div>
 
     <div class="navbar-end">
@@ -12,7 +17,7 @@
 </template>
 
 <script>
-import { isLoggedIn, login, logout } from '../services/auth';
+import { isLoggedIn, login, logout } from '../../services/auth';
 export default {
   methods: {
     handleLogin() {

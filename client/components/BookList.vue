@@ -27,16 +27,20 @@ export default {
   created () {
     axios.get('http://localhost:5000/api/v1/books')
       .then(res => {
-        console.log(res)
         this.books = res.data['books']
+        console.log(this.books)
       })
       .catch(error => console.log(error))
   }
 }
 </script>
 <style>
-.table {
-      margin-left: auto;
-      margin-right: auto;
-    }
+  .table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+  .box {
+    padding: 1.25rem;
+  }
 </style>

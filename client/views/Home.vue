@@ -11,7 +11,7 @@
 
 <script>
 import BookList from 'components/BookList'
-import Navbar from 'components/Navbar'
+import Navbar from 'components/Navbar/Navbar'
 
 export default {
   components: {
