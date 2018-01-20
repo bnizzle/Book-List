@@ -4,6 +4,8 @@ import Home from '../views/Home'
 import Callback from '../components/callback'
 import Post from '../views/Post'
 
+import { requireAuth } from '../services/auth';
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +23,7 @@ export default new Router({
     {
       name: 'post',
       path: '/post',
+      beforeEnter: requireAuth,
       component: Post
     }
   ]

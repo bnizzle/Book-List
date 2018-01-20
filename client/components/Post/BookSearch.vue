@@ -2,9 +2,9 @@
 <div>
   <h2 class="subtitle">Seach for a book</h2>
   <input class="input" type="text" placeholder="Search for a book" v-model="searchInput">
-  <button class="button" @click="searchForBook(searchInput)">Search</button>
-
-  <returned-list :returnedBooks="returnedBooks"></returned-list>
+  <div class="books">
+    <returned-list :returnedBooks="returnedBooks"></returned-list>
+  </div>
 </div>
 </template>
 
@@ -15,21 +15,30 @@ export default {
   data () {
     return {
       searchInput: '',
-      returnedBooks: {}
+      returnedBooks: []
     }
   },
   methods: {
     searchForBook() {
-      axios.get("https://www.googleapis.com/books/v1/volumes?q=" + this.searchInput)
+      axios.get("https://www.googleapis.com/books/v1/volumes?q=" + this.searchInput + "&projection=full")
       .then(res => {
         this.returnedBooks = res.data['items']
-        console.log(this.returnedBooks)
       })
       .catch(error => console.log(error))
     }
   },
   components: {
     ReturnedList
+  },
+  watch: {
+    searchInput() {
+      setTimeout(() => {this.searchForBook(this.searchInput)}, 2000)
+    }
   }
 }
 </script>
+<style>
+  .books {
+    padding-top: 15px;
+  }
+</style>

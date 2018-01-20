@@ -10,8 +10,8 @@
     </div>
 
     <div class="navbar-end">
-      <button class="button" v-show="isLoggedIn()" @click="handleLogout()">Logout</button>
-      <button class="button" v-show="!isLoggedIn()" @click="handleLogin()">Login</button>
+      <a class="navbar-item" v-show="isLoggedIn()" @click="handleLogout()">Logout</a>
+      <a class="navbar-item" v-show="!isLoggedIn()" @click="handleLogin()">Login</a>
     </div>
   </nav>
 </template>

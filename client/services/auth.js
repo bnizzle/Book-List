@@ -35,14 +35,34 @@ export function logout() {
   router.go('/');
 }
 
+// requireAuth
 export function requireAuth(to, from, next) {
   if (!isLoggedIn()) {
+    console.log('auth failed ...')
+    let path = '/login'
+    let result = auth0.parseHash(window.location.hash)
+    if (result && result.idToken) {
+      // set token in local storage
+      localStorage.setItem('id_token', result.idToken)
+
+      // redirect to home page
+      path = '/'
+
+      // get user profile data
+      auth0.getProfile(result.idToken, function (err, profile) {
+        if (err) {
+          // handle error
+          alert(err)
+        }
+        let user = JSON.stringify(profile)
+        localStorage.setItem('profile', user)
+      })
+    }
     next({
-      path: '/',
-      query: { redirect: to.fullPath }
-    });
+      path: path
+    })
   } else {
-    next();
+    next()
   }
 }
 
